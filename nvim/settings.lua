@@ -43,6 +43,7 @@ vim.cmd('highlight @lsp.type.macro.cpp guifg=#ff0000');
 vim.cmd('highlight @namespace.cpp guifg=#50b9eb');
 vim.cmd('highlight @lsp.typemod.enumMember.globalScope.cpp guifg=#22896e');
 vim.cmd('highlight @define.cpp guifg=#5c5c5c');
+vim.cmd('highlight @include.cpp guifg=#5c5c5c');
 vim.cmd('highlight @lsp.type.method.cpp guifg=#3e83a1');
 vim.cmd('highlight @string.cpp guifg=#c3e88d');
 vim.cmd('highlight @lsp.type.variable.cpp guifg=#8cdd9b');

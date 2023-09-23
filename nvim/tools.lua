@@ -30,7 +30,7 @@ function builder()
 	local term = Terminal:new({
 		display_name = "amu_build",
 		dir = "misc/",
-		cmd = "python build.py -notcurses /usr/include/notcurses/",
+		cmd = "python build.py -notcurses /usr/include/notcurses/ --cc",
 		close_on_exit = false,
 		direction = "vertical",
 	});

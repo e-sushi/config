@@ -103,6 +103,10 @@ require("lazy").setup({
 	"akinsho/toggleterm.nvim",	
 
 	"sakhnik/nvim-gdb",
+
+	"nvim-neorg/neorg",
+
+	"NeogitOrg/neogit",
 });
 
 
@@ -212,8 +216,22 @@ mason_lspconfig.setup({
 local lspconfig = require("lspconfig");
 
 lspconfig.lua_ls.setup({});
-lspconfig.clangd.setup({});
+lspconfig.clangd.setup({
+	cmd = {
+		"clangd",
+		"--log=verbose"
+	}
+});
 lspconfig.jsonls.setup({});
+lspconfig.pylsp.setup({
+	settings = {
+		pylsp = {
+			pycodestyle = {
+				enabled = false
+			}
+		}
+	}
+});
 
 -- @lspkind
 local lspkind = require("lspkind");
@@ -287,3 +305,16 @@ toggleterm.setup({
 	size = 20,
 	hide_numbers = true,
 });
+
+-- @neorg
+local neorg = require("neorg");
+neorg.setup({
+	load = {
+		["core.defaults"] = {},
+		["core.concealer"] = {}
+	}
+});
+
+-- @neogit
+local neogit = require("neogit");
+neogit.setup({});
