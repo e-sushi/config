@@ -131,7 +131,7 @@ font:
     #   - (macOS) Menlo
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
-    family: Gohu GohuFont
+    family: GohuFont uni11 Nerd Font Mono
 
     # The `style` can be specified to pick a specific face.
     style: Regular
@@ -148,15 +148,15 @@ font:
     #style: Bold
 
   # Italic font face
-  #italic:
+  italic:
     # Font family
     #
     # If the italic family is not specified, it will fall back to the
     # value specified for the normal font.
-    #family: monospace
+    family: MesloLGM Nerd Font
 
     # The `style` can be specified to pick a specific face.
-    #style: Italic
+    style: Italic
 
   # Bold italic font face
   #bold_italic:
@@ -170,7 +170,7 @@ font:
     #style: Bold Italic
 
   # Point size
-  #size: 11.0
+  size: 8.0
 
   # Offset is the extra space around each character. `offset.y` can be thought
   # of as modifying the line spacing, and `offset.x` as modifying the letter
@@ -191,10 +191,10 @@ font:
   # If `true`, Alacritty will use a custom built-in font for box drawing
   # characters (Unicode points 2500 - 259f).
   #
-  #builtin_box_drawing: true
+  builtin_box_drawing: true
 
 # If `true`, bold text is drawn using the bright color variants.
-#draw_bold_text_with_bright_colors: false
+draw_bold_text_with_bright_colors: false
 
 # Colors (Tomorrow Night)
 colors:
@@ -403,7 +403,7 @@ colors:
     #   - ▇ Block
     #   - _ Underline
     #   - | Beam
-    #shape: Block
+    shape: Beam
 
     # Cursor blinking state
     #
@@ -439,7 +439,7 @@ colors:
   #thickness: 0.15
 
 # Live config reload (changes require restart)
-#live_config_reload: true
+live_config_reload: true
 
 # Shell
 #
