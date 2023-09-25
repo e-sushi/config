@@ -16,6 +16,10 @@ vim.o.shiftwidth = 4;
 -- don't wrap
 vim.opt.wrap = false;
 
+-- disable swapfiles so i stop getting that silly message when i edit
+-- files in different instances of nvim
+-- this might be a bad idea.
+vim.cmd("set noswapfile");
 
 -- colors
 
