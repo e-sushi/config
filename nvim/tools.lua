@@ -24,17 +24,44 @@ function inspect_color()
 	end
 end
 
+local term = nil;
+local termbuf = nil;
+local job = nil;
+local termwin = nil;
 
 function builder()
-	local Terminal = require("toggleterm.terminal").Terminal;
-	local term = Terminal:new({
-		display_name = "amu_build",
-		dir = "misc/",
-		cmd = "python build.py -notcurses /usr/include/notcurses/ --cc",
-		close_on_exit = false,
-		direction = "vertical",
+	if job then return end;
+
+	if termbuf and vim.api.nvim_buf_is_valid(termbuf) then
+		vim.api.nvim_buf_delete(termbuf, {});
+	end
+
+	termbuf = vim.api.nvim_create_buf(false, false);
+
+	local visible = false;
+	if termwin ~= nil then
+		for _,w in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+			if w == termwin then
+				visible = true;
+				break;
+			end
+		end
+	end
+
+	if not visible then
+		vim.cmd("botright vsplit");
+		vim.api.nvim_win_set_buf(0, termbuf);
+		vim.api.nvim_win_set_option(0, 'number', false);
+		vim.cmd("vert resize 50");
+		termwin = vim.api.nvim_get_current_win();
+	end
+
+	job = vim.fn.termopen('python build.py -notcurses /usr/include/notcurses/ --cc', {
+		cwd = 'misc/',
+		on_exit = function(job_id, exit_code, event_type)
+			job = nil;
+		end
 	});
-	term:open(50);
 end
 
 vim.keymap.set('n', '<a-b>', function ()
