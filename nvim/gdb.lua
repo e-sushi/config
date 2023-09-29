@@ -152,8 +152,6 @@ function start_gdb()
 		return;
 	end
 
-
-
 	local gdbcmd = {
 		"gdb",
 		"-q", -- dont print greeting cause it'll mess stuff up

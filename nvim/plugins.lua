@@ -233,6 +233,8 @@ lspconfig.pylsp.setup({
 	}
 });
 
+lspconfig.racket_langserver.setup({});
+
 -- @lspkind
 local lspkind = require("lspkind");
 

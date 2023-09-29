@@ -7,6 +7,9 @@ vim.opt.termguicolors = true;
 vim.opt.number = true;
 
 -- don't allow 'signs' in the column left of line numbers
+-- for whatever reason vim makes the gutter appear when there
+-- are signs in it and disappear when there aren't, which is really
+-- annoying.
 vim.opt.signcolumn = "no";
 
 -- make tabs 4 spaces
@@ -15,6 +18,10 @@ vim.o.shiftwidth = 4;
 
 -- don't wrap
 vim.opt.wrap = false;
+
+-- sets auto c indentation to indent according to the statement after a
+-- case rather than whatever stupid thing it does by default
+vim.cmd("set cinoptions=l1");
 
 -- disable swapfiles so i stop getting that silly message when i edit
 -- files in different instances of nvim
@@ -25,6 +32,12 @@ vim.cmd("set noswapfile");
 
 vim.cmd("colorscheme kanagawa-dragon");
 vim.cmd("highlight Normal guibg=#000000")
+
+-- setup diagnostic colors
+vim.cmd("highlight DiagnosticSignError guifg=#e82424 guibg=#000000");
+vim.cmd("highlight DiagnosticSignWarn guifg=#ff9e3b guibg=#000000");
+vim.cmd("highlight DiagnosticSignInfo guifg=#658594 guibg=#000000");
+vim.cmd("highlight DiagnosticSignHint guifg=#6a9589 guibg=#000000");
 
 -- highlight line numbers to match diagnostics
 vim.cmd("sign define DiagnosticSignError numhl=DiagnosticSignError")

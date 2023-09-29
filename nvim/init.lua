@@ -9,16 +9,5 @@ for k,v in ipairs(vim.fn.glob("~/.config/nvim/*.lua", false, true)) do
 	end
 end
 
-
-vim.api.nvim_create_autocmd('BufEnter', {
-	callback = function(ev)
-		local buffer = vim.api.nvim_get_current_buf();
-		if vim.api.nvim_buf_get_option(buffer, 'buftype') == 'terminal' then
-			vim.cmd('startinsert');	
-		end	
-	end
-})
-
-
-
-
+-- delete the lsp log file everytime we start so it doesn't get huge
+vim.fn.delete("~/.local/state/nvim/lsp.log");

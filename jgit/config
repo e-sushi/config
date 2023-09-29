@@ -1,0 +1,3 @@
+[filesystem "N/A|17.0.8.1|/dev/sda2"]
+	timestampResolution = 2803 nanoseconds
+	minRacyThreshold = 10786 microseconds

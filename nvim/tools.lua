@@ -56,7 +56,7 @@ function builder()
 		termwin = vim.api.nvim_get_current_win();
 	end
 
-	job = vim.fn.termopen('python build.py -notcurses /usr/include/notcurses/ --cc', {
+	job = vim.fn.termopen('python build.py -notcurses /usr/include/notcurses/ --cc --pch', {
 		cwd = 'misc/',
 		on_exit = function(job_id, exit_code, event_type)
 			job = nil;
