@@ -68,5 +68,17 @@ vim.keymap.set('n', '<a-b>', function ()
 	builder()
 end);
 
+-- places a formatted date at the cursor
+vim.api.nvim_create_user_command('Date', function(opts)
+	vim.api.nvim_put({os.date()}, "c", true, true);
+end,
+{ nargs = 0 });
+
+
+vim.api.nvim_create_user_command('Time', function(opts) 
+	vim.api.nvim_put({os.date("%H:%M:%S")}, "c", true, true);
+end,
+{ nargs = 0});
+
 
 

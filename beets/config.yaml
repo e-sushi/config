@@ -1,0 +1,16 @@
+directory: ~/music
+library: ~/music/database.db
+
+plugins: discogs spotify deezer lastgenre
+
+discogs:
+  source_weight: 0.0
+
+spotify:
+  source_weight: 0.0
+
+deezer:
+  source_weight: 0.0
+
+paths: 
+  default: $albumartist/$album/$track-$title

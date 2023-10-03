@@ -18,6 +18,52 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
 
+local seq = require("pl.seq");
+
+local pprint = require("pprint");
+
+function string:startswith(start)
+	return self:sub(1, #start) == start;
+end
+
+function iter2table(i) 
+	local out = {};
+	for v in i do
+		if type(v) == 'function' then
+			table.insert(out, v());
+		else
+			table.insert(out, v);
+		end
+	end
+	return out;
+end
+
+function map(t, f)
+	local out = {};
+	for k,v in pairs(t) do
+		t[k] = f(v);
+	end
+	return t;
+end
+
+function zip(...)
+	local arrays, ans = {...}, {};
+	local index = 0;
+	return 
+		function()
+			index = index + 1;
+			for i,t in ipairs(arrays) do
+				if type(t) == 'function' then 
+					ans[i] = t();
+				else 
+					ans[i] = t[index];
+				end
+				if ans[i] == nil then return end;
+			end
+			return ans;
+		end;
+end
+
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -45,7 +91,7 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
+beautiful.init("themes/dark.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "alacritty"
@@ -216,6 +262,35 @@ awful.screen.connect_for_each_screen(function(s)
             s.mylayoutbox,
         },
     }
+
+	local cputimer = gears.timer{timeout=1};
+	cputimer:connect_signal("timeout", function() 
+
+		local function stat() 
+			local cpus = {};
+			for l in io.lines("/proc/stat") do
+				if not l:startswith("cpu") then break end;
+				table.insert(cpus, map({table.unpack(iter2table(l:gmatch("%S+")), 2)}, tonumber));
+			end
+			return cpus;
+		end
+
+		local stat0 = stat();
+		os.execute("sleep 0.1");
+		local stat1 = stat();
+
+		-- gears.debug.dump(iter2table(zip(stat1, stat0)), "zip");
+		
+		local delta = iter2table(seq.map(seq.zip(stat1, stat0), function(x)
+			return seq.map(seq.zip(x[2], x[1]), function(x)
+				return x[2] - x[1];
+			end);
+		end));
+
+		gears.debug.dump(delta, "delta");
+
+	end);
+	cputimer:start();
 end)
 -- }}}
 
@@ -555,10 +630,10 @@ client.connect_signal("request::titlebars", function(c)
 end)
 
 -- Enable sloppy focus, so that focus follows mouse.
-client.connect_signal("mouse::enter", function(c)
-    c:emit_signal("request::activate", "mouse_enter", {raise = false})
-end)
-
-client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
-client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
+--client.connect_signal("mouse::enter", function(c)
+--    c:emit_signal("request::activate", "mouse_enter", {raise = false})
+--end)
+--
+--client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
+--client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}

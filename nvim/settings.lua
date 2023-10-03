@@ -51,7 +51,7 @@ vim.cmd("sign define DiagnosticSignHint numhl=DiagnosticSignHint")
 vim.cmd('highlight @lsp.type.class.cpp guifg=#ffcb68');
 vim.cmd('highlight @lsp.type.type.cpp guifg=#ffcb68');
 vim.cmd('highlight @lsp.typemod.function.classScope.cpp guifg=#3e83a1');
-vim.cmd('highlight @lsp.type.function.cpp guifg=#3e83a1')
+vim.cmd('highlight @lsp.type.function.cpp guifg=#3e83a1');
 vim.cmd('highlight @keyword.return.cpp guifg=#14665b');
 vim.cmd('highlight @conditional.cpp guifg=#14665b');
 vim.cmd('highlight @repeat.cpp guifg=#14665b');
@@ -74,5 +74,10 @@ vim.cmd('highlight @lsp.type.enumMember.cpp guifg=#22896e');
 
 -- ui colors
 vim.cmd('highlight LineNr guifg=#aaaaaa guibg=#000000');
+
+-- git signs colors
+vim.cmd('highlight GitSignsAdd guibg=#000000');
+vim.cmd('highlight GitSignsChange guibg=#000000');
+vim.cmd('highlight GitSignsDelete guibg=#000000');
 
 

@@ -100,6 +100,8 @@ bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
+bindsym $mod+c split toggle, layout tabbed
+
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
 
@@ -185,14 +187,16 @@ bindsym $mod+r mode "resize"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-bar {
-        status_command i3status
-}
+# bar {
+#         status_command i3status
+# }
+
+exec polybar
 
 # colors
 
 #class                  #border  #backgr  #text    #indicator
-client.focused          #121212  #000000  #9e8a8e  #00a09d
-client.focused_inactive #101010  #191919  #999999
-client.unfocused        #101010  #191919  #999999
+client.focused          #000000  #003f4e  #ffffff  #00a09d
+client.focused_inactive #101010  #000000  #999999
+client.unfocused        #101010  #000000  #999999
 client.urgent           #cd989a  #cd989a  #2e3436

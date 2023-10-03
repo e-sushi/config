@@ -32,7 +32,6 @@ require("lazy").setup({
 	-- feature-full motions
 	"phaazon/hop.nvim",
 
-
 	-- general fuzzy finder
 	{"nvim-telescope/telescope.nvim",
 		dependencies = {
@@ -107,6 +106,10 @@ require("lazy").setup({
 	"nvim-neorg/neorg",
 
 	"NeogitOrg/neogit",
+
+	"folke/which-key.nvim",
+
+	"lewis6991/gitsigns.nvim",
 });
 
 
@@ -258,6 +261,7 @@ cmp.setup({
 		{name = 'nvim_lsp'},
 		{name = 'path'},
 		{name = 'nvim_lsp_signature_help'},
+		{name = 'neorg'},
 	},
 	mapping = {
 		['<s-cr>'] = cmp.mapping.confirm({select = true}),
@@ -313,10 +317,36 @@ local neorg = require("neorg");
 neorg.setup({
 	load = {
 		["core.defaults"] = {},
-		["core.concealer"] = {}
+		["core.concealer"] = {
+			config = {
+				icons = {
+					code_block = {
+						conceal = true,
+					}
+				}
+			}
+		},
+		["core.completion"] = {
+			config = {
+				engine = "nvim-cmp",
+			}
+		},
+		["core.integrations.nvim-cmp"] = {},
 	}
 });
 
 -- @neogit
 local neogit = require("neogit");
 neogit.setup({});
+
+-- @whichkey
+local whichkey = require("which-key");
+whichkey.setup();
+
+-- @gitsigns
+local gitsigns = require("gitsigns");
+gitsigns.setup({
+	numhl = true,
+});
+
+
