@@ -19,8 +19,8 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 require("awful.hotkeys_popup.keys")
 
 local seq = require("pl.seq");
-
 local pprint = require("pprint");
+local cpu = require("cpu");
 
 function string:startswith(start)
 	return self:sub(1, #start) == start;
@@ -263,10 +263,10 @@ awful.screen.connect_for_each_screen(function(s)
         },
     }
 
-	local cputimer = gears.timer{timeout=1};
+	local cputimer = gears.timer{timeout=0.2};
 	cputimer:connect_signal("timeout", function() 
 
-		local function stat() 
+		local function stat()
 			local cpus = {};
 			for l in io.lines("/proc/stat") do
 				if not l:startswith("cpu") then break end;
@@ -279,15 +279,25 @@ awful.screen.connect_for_each_screen(function(s)
 		os.execute("sleep 0.1");
 		local stat1 = stat();
 
-		-- gears.debug.dump(iter2table(zip(stat1, stat0)), "zip");
-		
-		local delta = iter2table(seq.map(seq.zip(stat1, stat0), function(x)
-			return seq.map(seq.zip(x[2], x[1]), function(x)
-				return x[2] - x[1];
-			end);
-		end));
+		local diffs = {};
 
-		gears.debug.dump(delta, "delta");
+		for a,b in seq.zip(stat1, stat0) do
+			local cpudiffs = {};
+			table.insert(cpudiffs, a[1] - b[1]);
+			for i=2,#a do
+				table.insert(cpudiffs, a[i] - b[i]);
+			end
+			table.insert(diffs, cpudiffs);
+		end
+
+		gears.debug.dump("----------------------------");
+
+		for i=1,#diffs do
+			local diff = diffs[i];
+			local total = seq.reduce('+', diff);
+			local ratio = 1 - diff[4] / total;
+			gears.debug.dump(ratio, "rat");
+		end
 
 	end);
 	cputimer:start();

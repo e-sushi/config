@@ -78,6 +78,8 @@ source $ZSH/oh-my-zsh.sh
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
+export VULKAN_SDK=/usr/include/vulkan
+
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
@@ -106,3 +108,5 @@ alias pmsyu="sudo pacman -Syu"
 alias pmq="sudo pacman -Q"
 alias pmql="sudo pacman -Ql"
 
+# opam configuration
+[[ ! -r /home/sushi/.opam/opam-init/init.zsh ]] || source /home/sushi/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null

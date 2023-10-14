@@ -196,7 +196,7 @@ exec polybar
 # colors
 
 #class                  #border  #backgr  #text    #indicator
-client.focused          #000000  #003f4e  #ffffff  #00a09d
+client.focused          #003f4e  #003f4e  #ffffff  #00a09d
 client.focused_inactive #101010  #000000  #999999
 client.unfocused        #101010  #000000  #999999
 client.urgent           #cd989a  #cd989a  #2e3436

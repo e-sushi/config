@@ -110,6 +110,12 @@ require("lazy").setup({
 	"folke/which-key.nvim",
 
 	"lewis6991/gitsigns.nvim",
+
+	{"nvim-telescope/telescope-smart-history.nvim",
+		dependencies = {
+			"kkharji/sqlite.lua"
+		}
+	}
 });
 
 
@@ -134,8 +140,20 @@ telescope.setup({
 		-- without conflicting with any others
 		path_display = "smart",
 	},
-
+	pickers = {
+		find_files = {
+			noignore = true,	
+		},
+	},
 });
+
+--require("telescope.builtin").live_grep{
+--	attach_mappings = function(_, map) 
+--		map("i", "<c-up>", require("telescope.actions").cycle_history_next);
+--		map("i", "<c-down>", require("telescope.actions").cycle_history_prev);
+--		return true
+--	end
+--};
 
 -- @wilder
 local wilder = require("wilder");
@@ -235,8 +253,22 @@ lspconfig.pylsp.setup({
 		}
 	}
 });
-
 lspconfig.racket_langserver.setup({});
+lspconfig.gopls.setup({});
+lspconfig.ruby_ls.setup({
+	cmd = {"bundle", "exec", "ruby-lsp"},
+	init_options = {
+		enabledFeatures = {
+			"documentHighlights",
+			"documentSymbols",
+			"selectionRanges",
+			"semanticHighlighting",
+			"completion",
+		}
+	}
+});
+
+lspconfig.ocamllsp.setup({});
 
 -- @lspkind
 local lspkind = require("lspkind");
@@ -348,5 +380,7 @@ local gitsigns = require("gitsigns");
 gitsigns.setup({
 	numhl = true,
 });
+
+-- @telescope-history
 
 

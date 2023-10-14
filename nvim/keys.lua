@@ -1,5 +1,17 @@
 vim.keymap.set('n', '<c-t>', '<cmd>Telescope<cr>');
-vim.keymap.set('n', '<c-e>', '<cmd>Telescope find_files<cr>');
+vim.keymap.set('n', '<c-e>', function() 
+	require("telescope.builtin").find_files() end);
+		--require("telescope.themes").get_dropdown(
+		--{
+		--	no_ignore = true,
+		--	layout_config = {width=0.9, height=0.9},
+		--})) end );
+vim.keymap.set('n', '<c-g>', function()
+	require("telescope.builtin").live_grep() end);
+		--require("telescope.themes").get_dropdown(
+		--{
+		--	layout_config = {width=0.9, height=0.9},
+		--})) end);
 
 vim.keymap.set('n', '<c-h>', '<cmd>HopChar1<cr>');
 

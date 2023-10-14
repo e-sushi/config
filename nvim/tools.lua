@@ -49,14 +49,14 @@ function builder()
 	end
 
 	if not visible then
-		vim.cmd("botright vsplit");
+		vim.cmd("rightbelow split");
 		vim.api.nvim_win_set_buf(0, termbuf);
 		vim.api.nvim_win_set_option(0, 'number', false);
-		vim.cmd("vert resize 50");
+		vim.api.nvim_win_set_height(0, 20);
 		termwin = vim.api.nvim_get_current_win();
 	end
 
-	job = vim.fn.termopen('python build.py -notcurses /usr/include/notcurses/ --cc --pch', {
+	job = vim.fn.termopen('python build.py --cc --ad', {
 		cwd = 'misc/',
 		on_exit = function(job_id, exit_code, event_type)
 			job = nil;

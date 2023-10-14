@@ -5,10 +5,6 @@ set pagination off
 set print array on
 set print elements 0
 
-set logging overwrite on
-set logging file temp/gdblog
-set logging enabled on
-
 set tui tab-width 2
 tui enable
 
@@ -19,5 +15,6 @@ define hook-stop
 	refresh
 end
 
-
-
+set logging overwrite on
+set logging file temp/gdblog
+set logging enabled on
