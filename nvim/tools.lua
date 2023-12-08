@@ -56,8 +56,8 @@ function builder()
 		termwin = vim.api.nvim_get_current_win();
 	end
 
-	job = vim.fn.termopen('python build.py --cc --ad', {
-		cwd = 'misc/',
+	job = vim.fn.termopen('tools/build', {
+		cwd = '.',
 		on_exit = function(job_id, exit_code, event_type)
 			job = nil;
 		end

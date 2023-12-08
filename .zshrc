@@ -108,5 +108,7 @@ alias pmsyu="sudo pacman -Syu"
 alias pmq="sudo pacman -Q"
 alias pmql="sudo pacman -Ql"
 
+alias rm="trash"
+
 # opam configuration
 [[ ! -r /home/sushi/.opam/opam-init/init.zsh ]] || source /home/sushi/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null

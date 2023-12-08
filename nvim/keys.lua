@@ -23,6 +23,7 @@ vim.keymap.set('n', '<c-s>', '<cmd>Telescope lsp_document_symbols<cr>');
 vim.keymap.set('n', '<a-s>', '<cmd>Telescope lsp_workspace_symbols<cr>');
 
 vim.keymap.set('n', '<F12>', function() vim.lsp.buf.definition({reuse_win=true}) end);
+vim.keymap.set('n', '<F2>', function() vim.lsp.buf.rename() end)
 
 vim.keymap.set('n', '<Up>', "gk");
 vim.keymap.set('n', '<Down>', "gj");

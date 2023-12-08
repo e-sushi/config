@@ -5,15 +5,15 @@ set pagination off
 set print array on
 set print elements 0
 
-set tui tab-width 2
-tui enable
+#set tui tab-width 2
+#tui enable
 
-tui window height src 20
-focus cmd
+#tui window height src 20
+#focus cmd
 
-define hook-stop
-	refresh
-end
+#define hook-stop
+#	refresh
+#end
 
 set logging overwrite on
 set logging file temp/gdblog

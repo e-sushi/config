@@ -91,7 +91,10 @@ require("lazy").setup({
 		}
 	},
 	
-	"L3MON4D3/LuaSnip",
+	{
+		"L3MON4D3/LuaSnip",
+		version = "v2.*"
+	},
 
 	-- bind keys to directly move windows around in a sort of i3 fashion
 	"sindrets/winshift.nvim",
@@ -115,7 +118,13 @@ require("lazy").setup({
 		dependencies = {
 			"kkharji/sqlite.lua"
 		}
-	}
+	},
+
+	"vim-crystal/vim-crystal",
+
+	"tikhomirov/vim-glsl",
+
+	"Jezda1337/nvim-html-css"
 });
 
 
@@ -142,7 +151,7 @@ telescope.setup({
 	},
 	pickers = {
 		find_files = {
-			noignore = true,	
+			no_ignore = true,	
 		},
 	},
 });
@@ -240,15 +249,20 @@ lspconfig.lua_ls.setup({});
 lspconfig.clangd.setup({
 	cmd = {
 		"clangd",
-		"--log=verbose"
-	}
+		"--log=verbose",
+		"-header-insertion=never",
+	},
+
+
 });
 lspconfig.jsonls.setup({});
 lspconfig.pylsp.setup({
 	settings = {
 		pylsp = {
-			pycodestyle = {
-				enabled = false
+			plugins = {
+				pycodestyle = {
+					enabled = false
+				}
 			}
 		}
 	}
@@ -269,13 +283,24 @@ lspconfig.ruby_ls.setup({
 });
 
 lspconfig.ocamllsp.setup({});
+lspconfig.rust_analyzer.setup({});
+lspconfig.phpactor.setup({});
+lspconfig.crystalline.setup({
+	cmd = {
+		"crystalline",
+		"--stdio",
+		"-v"
+
+	}
+})
+
+lspconfig.html.setup({})
 
 -- @lspkind
 local lspkind = require("lspkind");
 
 -- @cmp
 local cmp = require("cmp");
-local luasnip = require("luasnip");
 cmp.setup({
 	snippet = {
 		-- I HAVE to use a snippet engine because langauge server non-sense whatever man
